@@ -16,7 +16,9 @@ public class ClienteRepository implements IClienteRepository {
     public List<Cliente> findAll() {
         return List.of(
           new Cliente(1, "Thiago Rizzo"),
-          new Cliente(2, "Pedro Batista")
+          new Cliente(2, "Pedro Batista"),
+          new Cliente(2, "Patrícia Correia"),
+          new Cliente(2, "Rafael Madureira")
         );
     }
 }

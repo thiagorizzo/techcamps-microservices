@@ -1,11 +1,11 @@
 # techcamps-microservices
 
-# Criar JAR (skipping test)
+# Criação de JAR
 - ```mvn `-Dmaven.test.skip=true package```
 
-# Copiar Dockerfile para diretório target com .jar
-
 # Buildar imagem docker
+
+Copiar Dockerfile para diretório target
 
 Incluir tag de versão, no exemplo `:1`
 
@@ -13,11 +13,11 @@ Incluir tag de versão, no exemplo `:1`
 
 # Executar imagem docker
  
-Forwarding de porta de 80 para porta 8080 no container
+Forwarding de porta de 90 para porta 8080 no container
 
-- `docker run -p 80:8080 -t thiagorizzo/meu-app-spring:1`
+- `docker run -p 90:8080 -t thiagorizzo/meu-app-spring:1`
 
-# Publicar imagen no Docker Hub
+# Publicar imagem no Docker Hub
 - `docker login`
 - `docker push thiagorizzo/meu-app-spring:1`
 

@@ -3,7 +3,6 @@ package com.techcamps.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -11,11 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = "com.techcamps")
 @EnableJpaRepositories(basePackages = "com.techcamps")
 @EntityScan(basePackages = "com.techcamps")
-
-// https://stackoverflow.com/questions/28042426/spring-boot-error-creating-bean-with-name-datasource-defined-in-class-path-r
-// if you don't need the datasource, simply remove it from the auto-config process
-//@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-
 @SpringBootApplication()
 public class DemoApplication {
 
