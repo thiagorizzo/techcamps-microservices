@@ -1,0 +1,42 @@
+
+@url = http://192.168.139.16:30008
+
+### CRIAR PRODUTO
+POST {{url}}/produto HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "teclado predator"
+}
+
+
+### LISTA TODOS
+GET {{url}}/produto HTTP/1.1
+Content-Type: application/json
+
+### LISTA POR CÓDIGO
+GET {{url}}/produto/2 HTTP/1.1
+Content-Type: application/json
+
+
+### LISTA POR NOME
+GET {{url}}/produto/predator/nome HTTP/1.1
+Content-Type: application/json
+
+### REMOVER
+DELETE {{url}}/produto HTTP/1.1
+Content-Type: application/json
+
+{
+    "codigo": 1
+}
+
+
+### ATUALIZAR
+PUT http://localhost:8080/produto HTTP/1.1
+Content-Type: application/json
+
+{
+    "codigo": 2,
+    "nome": "nome alterado"
+}
