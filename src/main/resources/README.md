@@ -1,19 +1,27 @@
 # Criar JAR (skipping test)
-- mvn `-Dmaven.test.skip=true package
+- ```mvn `-Dmaven.test.skip=true package```
 
 # Copiar Dockerfile para diretório target com .jar
 
 # Buildar imagem docker
-- docker build . -t thiagorizzo/meu-app-spring
+
+Incluir tag de versão, no exemplo `:1`
+
+- `docker build . -t thiagorizzo/meu-app-spring:1`
 
 # Executar imagem docker
-- docker run -p 8181:8080 -t thiagorizzo/meu-app-spring
+ 
+Forwarding de porta de 80 para porta 8080 no container
+
+- `docker run -p 80:8080 -t thiagorizzo/meu-app-spring:1`
 
 # Publicar imagen no Docker Hub
-- docker login
-- docker push thiagorizzo/meu-app-spring
+- `docker login`
+- `docker push thiagorizzo/meu-app-spring:1`
 
 # Kubernetes deployment manifest
+
+Deve especificar qual tag de versão utilizar no container em `image`
 
 ```yaml
 apiVersion: apps/v1
@@ -34,7 +42,7 @@ spec:
     spec:
       containers:
         - name: meu-app-spring
-          image: thiagorizzo/meu-app-spring:latest
+          image: thiagorizzo/meu-app-spring:1
           ports:
             - containerPort: 8080
 ```
@@ -42,6 +50,11 @@ spec:
 - kubectl apply -f .\deployment.yml
 
 # Kubernetes nodeport manifest
+
+Cria forma de acesso externo através de uma porta específica, no caso, porta 30008.
+Nesse caso, requisições a qualquer um node do cluster que possuam a porta destino 30008
+serão direcionadas ao service `meu-app-spring` na porta 8080.
+
 
 ```yaml
 apiVersion: v1
@@ -57,20 +70,23 @@ spec:
       targetPort: 8080
       nodePort: 30008
 ```
-- kubectl apply -f .\nodeport.yml
+- `kubectl apply -f .\nodeport.yml`
 
-- http://<node ip>:3008/cliente
+
+- http://IP_DE_QUALQUER_NODE:30008/cliente
 - http://192.168.139.16:30008/cliente
 
 # Rollout
 
-- kubectl rollout history deployments/meu-app-spring
+Apresenta histórico de revisões do deployment
 
-# Rollout de uma versão
+- `kubectl rollout history deployments/meu-app-spring`
 
-- kubectl rollout undo deployments/meu-app-spring
+# Rollout para revision anterior
+
+- `kubectl rollout undo deployments/meu-app-spring`
 
 # Rollout para revision específica
 
-- kubectl rollout history deployments/meu-app-spring --revision=1
+- ` kubectl rollout history deployments/meu-app-spring --revision=1`
 
